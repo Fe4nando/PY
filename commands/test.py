@@ -9,7 +9,10 @@ from PIL import Image,ImageDraw,ImageFont
 from io import BytesIO
 from assets.presets import *
 
-from numpy import int0
+
+
+
+
 
 
 class Test(commands.Cog):
@@ -96,26 +99,28 @@ class Test(commands.Cog):
        
         await interaction.response.send_message(file = discord.File(r"./data/final1.png"))
         
-    @app_commands.command(name='create_embed',description='creates a discord embed')
-    @app_commands.choices(color= [
-        Choice(name="White",value="White"),
-        Choice(name="Black",value="Black"),
-        Choice(name='Blue',value='Blue'),
-        Choice(name='Red',value='Red'),
-        Choice(name='Green',value='Green')
-        
-    ])
-        
-    async def Create_Embed(self,interaction:discord.Interaction,channel:discord.TextChannel,title:str,text:str,color:str):
-            
+    @app_commands.command(name='new_embed',description='creates a discord embed')  
+    @app_commands.choices(color=[Choice(name='blue',value=0x3464eb),
+                                    ])
+    async def new_Embed(self,interaction:discord.Interaction,channel:discord.TextChannel,title:str,text:str,color:int):
         embed=discord.Embed(title=title,description=text,color=color)
-        await channel.send(embed=embed)
+        await channel.send(embed=embed) 
         await interaction.response.send_message('Sent!')
-       
-                            
-
+        
+    @app_commands.command(name='timetable',description='view your class is timetable')
+    @app_commands.choices(Division=[Choice(name='Division A',value='a'),
+                                    Choice(name='Division B',value='b')])
+    async def timetable(self,interaction:discord.Interaction,Division:str):
+        if Division=='a':
+            url='Division A link'
+        else:
+            url='Division B link'
+        await interaction.response.send_message(url)
+    
+   
     
 
+        
 async def open_account(user):
     users= await get_level_data()
         

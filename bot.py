@@ -1,5 +1,6 @@
 import discord 
 from discord.ext import commands
+from discord import app_commands
 from config import*
 import os
 
@@ -16,10 +17,18 @@ class aclient(commands.Bot):
             self.synced=True
         print('Staging Bot Online and Well')
         
+  
+        
     async def setup_hook(self):
      for filename in os.listdir('./commands'):
       if filename.endswith('.py'):
         await self.load_extension(f'commands.{filename[:-3]}')
+    
+   
+        
+        
+
+    
         
 client=aclient()
 client.run(token)
