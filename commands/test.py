@@ -100,7 +100,14 @@ class Test(commands.Cog):
         await interaction.response.send_message(file = discord.File(r"./data/final1.png"))
         
     @app_commands.command(name='new_embed',description='creates a discord embed')  
-    @app_commands.choices(color=[Choice(name='blue',value=0x3464eb),
+    @app_commands.choices(color=[Choice(name='default',value=0x5865F2),
+                                 Choice(name='white',value=0xffffff),
+                                 Choice(name='black',value=0x000000),
+                                 Choice(name='blue',value=0x3464eb),
+                                 Choice(name='red',value=0xff0000),
+                                 Choice(name='green',value=0x40ff00),
+                                 Choice(name='yellow',value=0xFFFF00),
+                                 Choice(name='purple',value=0xA020F0)
                                     ])
     async def new_Embed(self,interaction:discord.Interaction,channel:discord.TextChannel,title:str,text:str,color:int):
         embed=discord.Embed(title=title,description=text,color=color)
@@ -108,14 +115,15 @@ class Test(commands.Cog):
         await interaction.response.send_message('Sent!')
         
     @app_commands.command(name='timetable',description='view your class is timetable')
-    @app_commands.choices(Division=[Choice(name='Division A',value='a'),
-                                    Choice(name='Division B',value='b')])
-    async def timetable(self,interaction:discord.Interaction,Division:str):
-        if Division=='a':
-            url='Division A link'
-        else:
-            url='Division B link'
-        await interaction.response.send_message(url)
+    @app_commands.choices(division=[Choice(name='Division A',value='a'),
+                                  Choice(name='Division B',value='b')
+                                  ])
+    async def timetable(self,interaction:discord.Interaction,division:str):
+       if division=='a':
+            string='Division A link'
+       else:
+            string='Division B link'
+       await interaction.response.send_message(string)
     
    
     
